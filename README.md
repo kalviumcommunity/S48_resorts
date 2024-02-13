@@ -23,7 +23,9 @@ Welcome to our Resort Website! This repository contains the source code for our 
 
 ## Technologies Used
 Frontend: HTML, CSS, JavaScript
-Backend: [Backend Framework/Language]
-Database: [Database System]
-APIs: [List of APIs Used, if any]
+Backend: []
+Database: []
+APIs: []
+
+
 
