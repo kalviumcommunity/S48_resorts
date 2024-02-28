@@ -1,13 +1,20 @@
 const express = require('express');
 const app = express();
 const routes = require('./routes'); // Import your routes file
+const port = 3001;
+const mongoose = require('mongoose');
 
-const PORT = process.env.PORT || 3000;
 
 // Use the routes
 app.use('/', routes);
+app.use(cors())
+app.use(express.json())
+app.get('/resort',(req,res)=>{
+  resort.find()
+  .then(resort => resort.json(resort))
+  .catch(err => res.json(err))
+})
 
-// Middleware to handle undefined routes
 app.use((req, res) => res.status(404).send('Not found'));
 
 app.listen(PORT, () => {
