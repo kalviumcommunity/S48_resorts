@@ -8,7 +8,8 @@ const Landingpage = () => {
     <div>
       <header className="header">
         <div className="logo">
-          <Link to="/login">Login</Link> {/* Changed link to Link */}
+          <Link to="/login">Login</Link>
+          <Link to="/UserList">data</Link>  {/* Changed link to Link */}
         </div>
         <div className="title">
           <h1>Discover Serenity: Your Escape Awaits at Our Luxurious Resort</h1>

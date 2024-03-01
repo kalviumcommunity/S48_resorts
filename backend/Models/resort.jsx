@@ -1,11 +1,12 @@
-const mongoose = require('mongoose');
+const mongoose = require('mongoose')
 
 const resortSchema = new mongoose.Schema({
-    resort:String,
-    Name:Srting,
-    Location:String,
-   Description:String,
+    restaurant_name: String,
+    location: String,
+    specialities: String,
+    fresh_seafood: String,
+    variety_of_meat_preparation: String,
 })
 
-const reasortModels =  mongoose.model("resorts", resortSchema)
-model.exports = reasortModels
+const UserModel = mongoose.model("resort", resortSchema);
+module.exports = UserModel;
