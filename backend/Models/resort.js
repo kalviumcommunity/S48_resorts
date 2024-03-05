@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 
 const resortSchema = new mongoose.Schema({
-    restaurant_name: String,
+    resort_name: String,
     location: String,
     specialities: String,
     fresh_seafood: String,

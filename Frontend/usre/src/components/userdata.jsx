@@ -1,27 +1,39 @@
 import { useEffect, useState } from "react";
 import axios from 'axios';
 import './userdata.css';
+import { Link } from "react-router-dom";
 
 export default function UserList() {
   const [resorts, setResorts] = useState([]);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://localhost:3001/resort"); // Corrected API endpoint
+        const response = await axios.get("http://localhost:3000/");
         console.log("Response data:", response.data);
-        setResorts(response.data);
+        if (Array.isArray(response.data.data)) {
+          setResorts(response.data.data);
+        } else {
+          setError("Response data is not an array.");
+        }
       } catch (error) {
         console.error("Error:", error);
+        setError("Error fetching resorts.");
       }
     };
 
     fetchData();
   }, []);
 
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
+
   return (
     <div className="w-100 vh-100 d-flex justify-content-center align-items-center text-align-center">
       <div className="w-50">
+        <Link to="/create" className='btn btn-success' > Add +</Link>
         <table className="table">
           <thead>
             <tr>
