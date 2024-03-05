@@ -1,9 +1,7 @@
 {
   "dependencies": {
-<<<<<<< HEAD
-    "cors": "^2.8.5"
-=======
-    "react-router-dom": "^6.22.1"
->>>>>>> 0e43121e9508cf69aa0c8ad7b1cb3b2e214947e5
+    "axios": "^1.6.7",
+    "cors": "^2.8.5",
+    "react-router-dom": "^6.22.2"
   }
 }
