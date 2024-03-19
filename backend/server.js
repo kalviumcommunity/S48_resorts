@@ -1,111 +1,96 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
-const  UserModel  = require('./Models/resort');
-const routes = require('./routes');
-
+const UserModel = require('./Models/user');
+// const ResortModel = require('./Models/resort')
+// const Joi = require('joi');
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = 3000;
 
-
-async function Connection(){
- await  mongoose.connect("mongodb+srv://saiteja:saiteja9019@cluster0.9iqbstj.mongodb.net/resort?retryWrites=true&w=majority&appName=Cluster0", {
-  useNewUrlParser: true,
-  useUnifiedTopology: true
-});
-console.log('Connected to MongoDB')
-
-}
-// Middleware
 app.use(cors());
 app.use(express.json());
 
-// Routes
-// app.use('/', routes);
+mongoose.connect(process.env.MONGODB_URI,
+   { 
+    useNewUrlParser: true, 
+    useUnifiedTopology: true 
+  });
 
-// Get all users
 
-// Define GetAll function with proper error handling
-async function GetAll() {
-  try {
-    // Attempt to fetch users from the database
-    const users = await UserModel.find();
-    return users; // Return the retrieved users
-  } catch (error) {
-    // If an error occurs during database query, log the error and return an empty array
-    console.error('Error fetching users:', error);
-    return [];
-  }
-}
+// const userSchema = Joi.object({
+//   resort: Joi.string().required(),
+//   Location: Joi.string().required(),
+// });
 
-// Handle errors in the app.get route handler
-app.get('/', async (req, res) => {
-  try {
-    // Attempt to fetch users using the GetAll function
-    const users = await GetAll();
-    // Send the retrieved users as a response
-    res.send({ data: users });
-  } catch (error) {
-    // If an error occurs, return an Internal Server Error response
-    res.status(500).json({ error: 'Internal Server Error' });
-  }
+app.get('/',(req, res) => {
+  res.send("Welcome to the server!");
+} )
+ 
+app.get('/getUsers', (req, res) => {
+  UserModel.find()
+    .then(users => res.json(users))
+    .catch(err => res.status(500).json(err));
 });
 
-
-// Get user by ID
-app.get('/getUser/:id', async (req, res) => {
-  try {
-    const id = req.params.id;
-    const user = await UserModel.findById(id);
-    if (!user) {
-      return res.status(404).json({ error: 'User not found' });
-    }
-    res.json(user);
-  } catch (error) {
-    res.status(500).json({ error: 'Internal Server Error' });
-  }
+app.get('/getUsers/:id', (req, res) => {
+  const id = req.params._id;
+  UserModel.findById(id)
+    .then(user => {
+      if (!user) {
+        return res.status(404).json({ message: "User not found" });
+      }
+      res.json(user);
+    })
+    .catch(err => res.status(500).json(err));
 });
 
-// Update user by ID
-app.put('/updateUser/:id', async (req, res) => {
-  try {
-    const id = req.params.id;
-    const updatedUser = await UserModel.findByIdAndUpdate(id, req.body, { new: true });
-    res.json(updatedUser);
-  } catch (error) {
-    res.status(500).json({ error: 'Internal Server Error' });
-  }
-});
+// app.put('/updateUser/:id', (req, res) => {
+//   const id = req.params.id;
+//   UserModel.findByIdAndUpdate(id, {
+//     resort: req.body.resort,
+//     Location: req.body.Location,
+//   }, { new: true })
+//     .then(updatedUser => {
+//       if (!updatedUser) {
+//         return res.status(404).json({ message: "User not found" });
+//       }
+//       res.json(updatedUser);
+//     })
+//     .catch(err => res.status(500).json(err));
+// });
 
-// Delete user by ID
-app.delete('/deleteUser/:id', async (req, res) => {
-  try {
-    const id = req.params.id;
-    const result = await UserModel.findByIdAndDelete(id);
-    res.json(result);
-  } catch (error) {
-    res.status(500).json({ error: 'Internal Server Error' });
-  }
-});
+// app.delete('/deleteUser/:id', (req, res) => {
+//   const id = req.params.id;
+//   UserModel.findByIdAndDelete(id)
+//     .then(deletedUser => {
+//       if (!deletedUser) {
+//         return res.status(404).json({ message: "User not found" });
+//       }
+//       res.json({ message: "User deleted successfully", user: deletedUser });
+//     })
+//     .catch(err => res.status(500).json(err));
+// });
 
-// Create user
-app.post("/createUser", async (req, res) => {
-  try {
-    const { username, email, favorite_resort_list } = req.body;
-    const newUser = new UserModel({ username, email, favorite_resort_list });
-    await newUser.save();
-    res.status(201).json(newUser);
-  } catch (error) {
-    res.status(500).json({ error: 'Internal Server Error' });
-  }
-});
+// app.post("/createUser", (req, res) => {
+//   // Validate request body using Joi schema
+//   const { error, value } = userSchema.validate(req.body);
+//   if (error) {
+//     return res.status(400).json({ error: error.details[0].message });
+//   }
 
-// Error handling for undefined routes
-app.use((req, res) => res.status(404).json({ error: 'Not found' }));
+//   UserModel.create(value)
+//     .then(newUser => res.json(newUser))
+//     .catch(err => res.status(500).json(err));
+// });
 
-// Start server
-Connection().then(() =>{
+// // Error handling middleware
+// app.use((err, req, res, next) => {
+//   console.error(err.stack);
+//   res.status(500).send('Something broke!');
+// });
+
+// app.use((req, res) => res.status(404).send('Not found'));
+
 app.listen(PORT, () => {
-  console.log(`🚀 Server is running on port ${PORT}`);
+  console.log(`🚀Server is running on port ${PORT}`);
 });
-})

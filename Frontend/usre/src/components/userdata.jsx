@@ -10,10 +10,10 @@ export default function UserList() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://localhost:3000/");
+        const response = await axios.get("http://localhost:3000/resort");
         console.log("Response data:", response.data);
-        if (Array.isArray(response.data.data)) {
-          setResorts(response.data.data);
+        if (Array.isArray(response.resort)) {
+          setResorts(response.resort);
         } else {
           setError("Response data is not an array.");
         }
@@ -33,16 +33,17 @@ export default function UserList() {
   return (
     <div className="w-100 vh-100 d-flex justify-content-center align-items-center text-align-center">
       <div className="w-50">
-        <Link to="/create" className='btn btn-success' > Add +</Link>
+        <Link to="/create" className='btn btn-success'> Add +</Link>
         <table className="table">
           <thead>
             <tr>
               <th>Resort Name</th>
               <th>Location</th>
-              <th>Name</th>
+              <th>Name</th> 
               <th>Description</th>
               <th>Nearby Attractions</th>
               <th>Amenities</th>
+              <th>Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -54,6 +55,12 @@ export default function UserList() {
                 <td>{resort.Description}</td>
                 <td>{resort.nearByAttractions}</td>
                 <td>{resort.Amenities}</td>
+                <td>
+                  <Link to={`/update/${resort._id}`}>
+                    <button>Update</button>
+                  </Link>
+                  <button>Delete</button>
+                </td>
               </tr>
             ))}
           </tbody>

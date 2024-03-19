@@ -1,4 +1,3 @@
-// Landingpage.js
 import React from 'react';
 import './Landingpage.css';
 import { Link } from 'react-router-dom';
@@ -8,8 +7,8 @@ const Landingpage = () => {
     <div>
       <header className="header">
         <div className="logo">
-          <Link to="/login" className="button">Login</Link>
-          <Link to="/UserList" className="button">Data</Link>  
+          <Link to="/signUp" className="button">SignUp</Link>
+          <Link to="/Users" className="button">Data</Link>  
         </div>
         <div className="title">
           <h1>Discover Serenity: Your Escape Awaits at Our Luxurious Resort</h1>
