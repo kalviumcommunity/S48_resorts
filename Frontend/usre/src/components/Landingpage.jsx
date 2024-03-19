@@ -7,7 +7,11 @@ const Landingpage = () => {
     <div>
       <header className="header">
         <div className="logo">
+<<<<<<< HEAD
+          <Link to="/signUp" className="button">SignUp</Link>
+=======
           <Link to="/login" className="button">Login</Link>
+>>>>>>> main
           <Link to="/Users" className="button">Data</Link>  
         </div>
         <div className="title">
