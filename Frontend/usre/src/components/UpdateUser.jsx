@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
-import './UpdateUser.css';
-// import './UpdateUser.css';
+import './UpdatedUser.css';
 
 function UpdateUser() {
     const { id } = useParams();
