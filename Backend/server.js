@@ -1,16 +1,14 @@
 const express = require('express');
 const app = express();
 const port = 3000;
-
+const bodyParser = require('body-parser');
+const routes = require('./routes');
+app.use(bodyParser.json());
+// Mount the routes from routes.js
+app.use('/', routes);
 
 app.get("/", (req, res) => {
     res.json(`Server is running on ${port}`)
-})
-
-// get request or pong message 
-
-app.get("/ping", (req, res) => {
-    res.json("pong")
 })
 
 app.listen(port, () => {
