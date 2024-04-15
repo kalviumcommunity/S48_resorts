@@ -4,9 +4,14 @@ const app = express();
 const port = 3000;
 const mongoose = require('mongoose');
 const mongoDBuri = process.env.MONGODB_URI
+const bodyParser = require('body-parser');
+const routes = require('./routes');
+app.use(bodyParser.json());
+
+// Mount the routes from routes.js
+app.use('/', routes);
 
 // connecting database(mongoDB) to server
-
 mongoose.connect(mongoDBuri)
 .then(()=>{console.log("Database Connected ")})
 .catch((err)=> console.error(err))
@@ -15,10 +20,6 @@ app.get("/", (req, res) => {
     res.json(`Server is running on ${port}`)
 })
 
-// get request or pong message 
-app.get("/ping", (req, res) => {
-    res.json("pong")
-})
 
 //get request for mongodb
 app.get("/mongo", (req, res) => {
