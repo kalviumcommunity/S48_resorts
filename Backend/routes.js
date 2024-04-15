@@ -17,7 +17,7 @@ router.get('/items', (req, res) => {
 
 // Update operation - PUT
 router.put('/items/:id', (req, res) => {
-    const itemId = req.params.id;
+    const itemId = req.params.index;
     const updatedItem = req.body;
     items[itemId] = updatedItem;
     res.json(updatedItem);
@@ -27,7 +27,7 @@ router.put('/items/:id', (req, res) => {
 router.delete('/items/:id', (req, res) => {
     const itemId = req.params.id;
     items.splice(itemId, 1);
-    res.sendStatus(204);
+    res.sendStatus(204).json("deleted item successfully");
 });
 
 module.exports = router;
