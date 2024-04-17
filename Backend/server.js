@@ -9,7 +9,7 @@ const routes = require('./routes');
 app.use(bodyParser.json());
 
 // Mount the routes from routes.js
-app.use('/', routes);
+app.use('/api', routes);
 
 // connecting database(mongoDB) to server
 mongoose.connect(mongoDBuri)
