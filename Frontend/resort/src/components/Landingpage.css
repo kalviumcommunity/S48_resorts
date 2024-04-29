@@ -1,14 +1,28 @@
 /* Landingpage.css */
-@import url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
 
-body {
-  font-family: 'Open Sans', sans-serif;
-  overflow: hidden;
-  margin: auto;
+*{
+  padding: 0;
+  margin: 0;
+  font-family: "Playfair Display", serif;
+}
+
+.navLanding {
+  width: 100%;
+  height: 50px;
+  background-color: #001E6C;
+  font-size: 20px;
+  display: flex;
+  justify-content: right;
+}
+.navitms{
+ text-decoration: none;
+ color: white;
+ margin-right: 25px;
+ margin-top: 6px;
 }
 
 .landing-page {
-   
   background-image: url('https://www.usnews.com/object/image/00000178-f4fa-d258-a5f9-fdffb8ec0000/39-minitas-beach-club2.jpg?update-time=1678805410349&size=responsive640');
   background-size: cover;
   background-position: center;
@@ -26,29 +40,27 @@ body {
 
 .title h1 {
   margin: 0;
-  color: #001E6C;
+  color: white;
   font-size: 44px;
   padding-top: 80px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
+
 
 .description {
   text-align: center;
-  color: #957a5b; 
+  color: rgb(240, 131, 53); 
+  text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.476);
   font-size: 20px; 
+  font-weight: 800;
+  font-style: italic;
   line-height: 1.5; 
-  margin-top: 20px; 
+  padding : 30px 50px;
+  background-image: linear-gradient(to right, #00f7ff1f, #00a3a0b5); 
+
 }
 
-.navbar {
-  position: relative;
-  width: 100%;
-  height: 50px;
-  background: #001E6C;
-  font-size: 0;
-  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
-}
-
-.button {
+#startbtn {
   font-size: 15px;
   text-transform: uppercase;
   color: white;
@@ -62,7 +74,7 @@ body {
   padding: 0 20px;
   border-radius: 8px;
   margin-right: 20px;
-}
+} 
 
 .animation {
   position: absolute;
@@ -72,4 +84,16 @@ body {
   background: #1abc9c;
   border-radius: 8px;
   transition: all 0.5s ease 0s;
+}
+
+#startbtn {
+  background-color: blue;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  text-align: center;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
 }
