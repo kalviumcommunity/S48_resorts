@@ -1,0 +1,44 @@
+[{
+    "_id": {
+      "$oid": "6617b4b2572d7d5c0fc764a1"
+    },
+    "resortName": "Paradise Cove Resort",
+    "openingTime": "10:00",
+    "closingTime": "6:00",
+    "resortAddress": "This address reflects the coastal and idyllic nature often associated with resorts named ",
+    "resortcontactNumber": "0987654321"
+  },
+
+  {
+    "_id": {
+      "$oid": "6617b7ca348174939f12f45b"
+    },
+    "resortName": "Serene Haven Resort",
+    "openingTime": "11:00",
+    "closingTime": "05:00",
+    "resortAddress": "Serene Haven Resort: 456 Tranquility Trail, Lakeside, CA 92040",
+    "resortcontactNumber": "9775238996"
+  },
+
+  {
+    "_id": {
+      "$oid": "6617b7ca348174939f12f45b"
+    },
+    "resortName": "Whispering Pines Resort",
+    "openingTime": "12:00",
+    "closingTime": "06:30",
+    "resortAddress": "Whispering Pines Resort: 222 Whispering Pines Drive, Timberlake, OR 97000, ",
+    "resortcontactNumber": "69983235779"
+  },
+
+  {
+    "_id": {
+      "$oid": "6617b7ca348174939f12f45b"
+    },
+    "resortName": "Sunset Ridge Resort",
+    "openingTime": "10:00",
+    "closingTime": "6:00",
+    "resortAddress": "Sunset Ridge Resort: 666 Sunset Ridge Road, Horizon Heights, AZ 85000",
+    "resortcontactNumber": "7349569423"
+  }]
+

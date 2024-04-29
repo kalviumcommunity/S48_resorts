@@ -1,9 +1,19 @@
-// Landingpage.jsx
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './Landingpage.css';
+import ResortsList from './resortdata';
 
 const Landingpage = () => {
+  const [showResorts, setShowResorts] = useState(false);
+
+  const handleExploreClick = () => {
+    setShowResorts(true);
+  };
+
+  const handleCloseModal = () => {
+    setShowResorts(false);
+  };
+
   return (
     <div className="landing-page"> 
       <nav className="navLanding">
@@ -21,9 +31,10 @@ const Landingpage = () => {
           <p>Welcome to our resort website! <br/> Explore our website which is filled with a lot of resorts, select the best you want. We have everything you need  to plan your perfect getaway. Book your escape today and let the relaxation begin!</p>
         </div>
         <div>
-          <button id='startbtn'>Explore -> </button>
+          <button id='startbtn' onClick={handleExploreClick}>Explore -> </button>
         </div>
-      </div>   
+      </div>
+      {showResorts && <ResortsList onClose={handleCloseModal} />} 
     </div>
   );
 }
