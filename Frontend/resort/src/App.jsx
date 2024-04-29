@@ -1,12 +1,17 @@
 import './App.css';
 import Landingpage from './components/Landingpage';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'; // Import Routes and Route from react-router-dom
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import SignUp from './components/Signup';
+import Login from './components/Login';
+
 
 function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Landingpage />} /> {/* Define the route for the Landingpage component */}
+        <Route path="/" element={<Landingpage />} /> 
+        <Route path="/signup" element={<SignUp />} /> 
+        <Route path="/login" element={<Login />} />
       </Routes>
     </Router>
   );
