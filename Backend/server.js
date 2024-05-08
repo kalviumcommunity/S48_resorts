@@ -5,11 +5,11 @@ const port = process.env.PORT || 3000;
 const mongoose = require('mongoose');
 const mongoDBuri = process.env.MONGODB_URI;
 const bodyParser = require('body-parser');
-const cors = require('cors'); // Import the cors package
+const cors = require('cors'); 
 const UserModel = require('./model/Users');
 
 app.use(bodyParser.json());
-app.use(cors()); // Use the cors middleware to enable CORS for all routes
+app.use(cors());
 
 mongoose.connect(mongoDBuri, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => {
