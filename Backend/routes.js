@@ -1,7 +1,13 @@
 const express = require('express');
 const router = express.Router();
 
-let items = []; // Example data (you would typically use a database)
+let items = [
+    {
+        id:1,
+        name:"b.sai teja",
+        email:"saiteja99722@gmail.com"
+    }
+]; // Example data (you would typically use a database)
 
 // Create operation - POST
 router.post('/items', (req, res) => {
