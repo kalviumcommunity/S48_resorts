@@ -1,11 +1,10 @@
 const express = require('express');
 const router = express.Router();
 
-let items = [
+let items = [  
     {
-        id:1,
-        name:"b.sai teja",
-        email:"saiteja99722@gmail.com"
+        "item_id" : "book",
+        "item_content" : "Novels"
     }
 ]; // Example data (you would typically use a database)
 

@@ -11,7 +11,7 @@ app.use('/', routes);
 
 // connecting database(mongoDB) to server
 mongoose.connect(mongoDBuri)
-.then(()=>{console.log("Database Connected ")})
+.then(()=>{console.log("Database Connected!!")})
 .catch((err)=> console.error(err))
 
 app.get("/", (req, res) => {
@@ -19,7 +19,7 @@ app.get("/", (req, res) => {
 })
 
 //get request for mongodb
-app.get("/mongoConn", (req, res) => {
+app.get("/mongo", (req, res) => {
     if (mongoose.connection.readyState == 1) {
         res.json("Database Connected ")
     }else{
