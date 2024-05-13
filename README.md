@@ -30,3 +30,4 @@ APIs: []
 
 render deployed link: https://resort-z7rz.onrender.com/
 
+netlify link :-  https://6641a008803631637ad71a47--steady-mochi-cfe5f2.netlify.app/
