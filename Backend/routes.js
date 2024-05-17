@@ -1,12 +1,7 @@
 const express = require('express');
 const router = express.Router();
-
-let items = [  
-    {
-        "item_id" : "book",
-        "item_content" : "Novels"
-    }
-]; // Example data (you would typically use a database)
+const ResortModal = require("./Modals/Resortmodal")
+const UsersModal =  require('./Modals/Usermodal')
 
 // Create operation - POST
 router.post('/items', (req, res) => {
@@ -15,11 +10,28 @@ router.post('/items', (req, res) => {
     res.status(201).json(newItem);
 });
 
-// Read operation - GET
-router.get('/items', (req, res) => {
-    res.json(items);
-});
 
+
+// Read operation - GET
+// fetching the resortsdata from mongodb
+router.get('/resortsdata', async (req, res) => {
+    try {
+      const resorts = await ResortModal.find();
+      res.status(200).send(resorts);
+    } catch (err) {
+      res.status(500).send(err);
+    }
+  });
+
+// fetching the usersdata from mongodb
+  router.get('/usersdata', async (req, res) => {
+    try {
+      const users = await UsersModal.find();
+      res.status(200).send(users);
+    } catch (err) {
+      res.status(500).send(err);
+    }
+  });
 // Update operation - PUT
 router.put('/items/:id', (req, res) => {
     const itemId = req.params.index;
