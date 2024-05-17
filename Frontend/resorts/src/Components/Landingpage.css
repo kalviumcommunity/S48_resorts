@@ -64,7 +64,6 @@
 #startbtn {
   font-size: 15px;
   text-transform: uppercase;
-  color: white;
   text-decoration: none;
   line-height: 50px;
   text-align: center;
@@ -73,13 +72,19 @@
   border-radius: 8px;
   margin-right: 20px;
   border: none;
+  cursor: pointer;
 } 
 
+#expbtn{
+  text-decoration: none;
+  color: white;
+}
 #startbutton{
   margin: 5%;
   padding-right: 100px;
   display: flex;
   justify-content:flex-end;
+  cursor: pointer;
 }
 
 
