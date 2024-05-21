@@ -1,0 +1,91 @@
+/* Landingpage.css */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
+
+*{
+  padding: 0;
+  margin: 0;
+  font-family: "Playfair Display", serif;
+}
+
+.landing-page-container {
+  background-image: url('https://www.usnews.com/object/image/00000178-f4fa-d258-a5f9-fdffb8ec0000/39-minitas-beach-club2.jpg?update-time=1678805410349&size=responsive640');
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+  width: 100vw;
+  overflow-x: hidden;
+}
+
+.navLanding {
+  width: 100%;
+  height: 60px;
+  background-color: #001E6C;
+  font-size: 18px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 20px;
+}
+
+
+.navitms{
+ text-decoration: none;
+ color: white;
+ margin-right: 25px;
+}
+
+.header, .title {
+  text-align: center;
+}
+
+.title h1 {
+  margin: 0;
+  color: white;
+  font-size: 40px;
+  margin-top: 80px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.description{
+  margin-top: 5%;
+  margin-left: 10%;
+  margin-bottom: 5%;
+  width: 30%;
+  background-color: #001E6C;
+  border-radius: 10px;
+  text-align: left;
+  color: white; 
+  font-size: 20px; 
+  font-style: italic;
+  padding : 30px 50px;
+  line-height: 1.5em;
+}
+
+#startbtn {
+  font-size: 15px;
+  text-transform: uppercase;
+  text-decoration: none;
+  line-height: 50px;
+  text-align: center;
+  background-color: #001E6C;
+  padding: 0 20px;
+  border-radius: 8px;
+  margin-right: 20px;
+  border: none;
+  cursor: pointer;
+} 
+
+#expbtn{
+  text-decoration: none;
+  color: white;
+}
+#startbutton{
+  margin: 5%;
+  padding-right: 100px;
+  display: flex;
+  justify-content:flex-end;
+  cursor: pointer;
+}
+
+
+

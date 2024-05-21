@@ -1,35 +1,38 @@
 require('dotenv').config();
 const express = require('express');
+const cors = require('cors'); // Import cors
+const mongoose = require('mongoose');
+const routes = require('./routes'); // Assuming routes.js is your routes file
+
 const app = express();
 const port = 3000;
-const mongoose = require('mongoose');
-const mongoDBuri = process.env.MONGODB_URI
-const bodyParser = require('body-parser');
-const routes = require('./routes');
-app.use(bodyParser.json());
+const mongoDBuri = process.env.MONGODB_URI;
 
-// Mount the routes from routes.js
-app.use('/api', routes);
+// Middleware
+app.use(cors()); // Enabling CORS
+app.use(express.json()); // Parse JSON bodies
+app.use('/', routes); // Mount routes
 
-// connecting database(mongoDB) to server
-mongoose.connect(mongoDBuri)
-.then(()=>{console.log("Database Connected ")})
-.catch((err)=> console.error(err))
+// Connecting database (MongoDB) to server
+mongoose.connect(mongoDBuri, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => { console.log("Database Connected!!") })
+  .catch((err) => console.error(err));
 
+// Basic route to check server status
 app.get("/", (req, res) => {
-    res.json(`Server is running on ${port}`)
-})
+  res.json(`Server is running on port ${port}`);
+});
 
-
-//get request for mongodb
+// Get request for MongoDB connection status
 app.get("/mongo", (req, res) => {
-    if (mongoose.connection.readyState == 1) {
-        res.json("Database Connected ")
-    }else{
-        res.json("Error connecting to Database")
-    }
-})
+  if (mongoose.connection.readyState === 1) {
+    res.json("Database Connected");
+  } else {
+    res.json("Error connecting to Database");
+  }
+});
 
+// Start the server
 app.listen(port, () => {
-    console.log(`🚀Server is running on port ${port}`);
-  });
+  console.log(`🚀 Server is running on port ${port}`);
+});

@@ -1,68 +1,50 @@
 const express = require('express');
 const router = express.Router();
-
-let users = [
-    {
-        id:1,
-        name:"b.sai teja",
-        email:"saiteja99722@gmail.com"
-    }
-]; // Example data (you would typically use a database)
+const ResortModal = require('./Modals/Resortmodal');
+const UsersModal = require('./Modals/Usermodal');
 
 // Create operation - POST
-router.post('/users', (req, res) => {
-    const {name,email} = req.body; 
-    if (!name || !email){ 
-        return res.status(404).json({message: "Required details are not provided"});
-    }
-    const newUser = {
-        id: users.length +1,
-        name: name,
-        email: email
-    }
-    users.push(newUser);
-    res.status(201).json(newUser);
+router.post('/items', (req, res) => {
+  const newItem = req.body;
+  // Assuming 'items' is a placeholder array; replace with actual DB operation
+  items.push(newItem);
+  res.status(201).json(newItem);
 });
 
 // Read operation - GET
-router.get('/users', (req, res) => {
-    res.status(200).json(users);
+router.get('/resortsdata', async (req, res) => {
+  try {
+    const resorts = await ResortModal.find();
+    res.status(200).send(resorts);
+  } catch (err) {
+    res.status(500).send(err);
+  }
 });
-// get req to read spcfic user data
-router.get('/users/:id', (req, res) => {
-    const userId = parseInt(req.params.id)   
-    const user = users.find(user => user.id === userId)
-    if (!user){
-        return res.status(404).json({
-            message:"User not found"
-        })
-    }
-    res.status(200).json(users);
+
+router.get('/usersdata', async (req, res) => {
+  try {
+    const users = await UsersModal.find();
+    res.status(200).send(users);
+  } catch (err) {
+    res.status(500).send(err);
+  }
 });
+
 // Update operation - PUT
-router.put('/users/:id', (req, res) => {
-    const userId =parseInt(req.params.id);
-    const {name,email} = req.body
-    const user = users.find(user=> user.id === userId)
-    if(!user){
-        return res.status(404).json({message:"User not found"})
-    }
-    user.name = name || user.name
-    user.email = email || user.email
-    
-    res.status(200).json(user);
+router.put('/items/:id', (req, res) => {
+  const itemId = req.params.id;
+  const updatedItem = req.body;
+  // Assuming 'items' is a placeholder array; replace with actual DB operation
+  items[itemId] = updatedItem;
+  res.json(updatedItem);
 });
 
 // Delete operation - DELETE
-router.delete('/users/:id', (req, res) => {
-    const userId =parseInt(req.params.id);
-    const index = users.findIndex(user=> user.id === userId)
-    if (index === -1){
-        return res.status(404).json({message:"User not found"})
-    }
-    users.splice(index, 1);
-    // res.sendStatus(204)
-    res.json("deleted item successfully");
+router.delete('/items/:id', (req, res) => {
+  const itemId = req.params.id;
+  // Assuming 'items' is a placeholder array; replace with actual DB operation
+  items.splice(itemId, 1);
+  res.status(204).json("deleted item successfully");
 });
 
 module.exports = router;

@@ -1,0 +1,43 @@
+.resorts-list-page {
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    background-color: #f0f4f8;
+    color: #333;
+  }
+  
+  .resorts-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+  }
+  
+  .resort-item {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    width: calc(33.333% - 40px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+  }
+  
+  .resort-item:hover {
+    transform: translateY(-5px);
+  }
+  
+  .resort-item h3 {
+    margin-top: 0;
+    font-size: 1.5em;
+    color: #333;
+  }
+  
+  .resort-item p {
+    font-size: 1em;
+    color: #666;
+  }
+  
+#resorttitle{
+text-align: center;
+padding-bottom: 20px;
+}
