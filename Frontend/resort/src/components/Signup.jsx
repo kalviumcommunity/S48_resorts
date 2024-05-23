@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import './Signup.css';
+import { useNavigate } from 'react-router-dom'
 
 const SignUp = () => {
   const [fields, setFields] = useState({
@@ -11,6 +12,7 @@ const SignUp = () => {
   const [submitted, setSubmitted] = useState(false);
   const [validation, setValidation] = useState(false);
   const [showError, setShowError] = useState(false);
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -22,7 +24,8 @@ const SignUp = () => {
     if (fields.username && fields.email && fields.password) {
       setValidation(true);
       setSubmitted(true);
-      setShowError(false); 
+      setShowError(false);
+      navigate("/Login")
     } else {
       setShowError(true); // Show error if any of the fields are empty
     }

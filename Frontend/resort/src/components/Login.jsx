@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./Login.css";
+import { useNavigate } from 'react-router-dom'
 
 const Login = () => {
   const [credentials, setCredentials] = useState({
@@ -9,6 +10,7 @@ const Login = () => {
 
   const [submitted, setSubmitted] = useState(false);
   const [showError, setShowError] = useState(false); 
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -22,6 +24,7 @@ const Login = () => {
       console.log("Password:", credentials.password);
       setSubmitted(true);
       setShowError(false); 
+      navigate("/Home")
     } else {
       setShowError(true); 
     }
