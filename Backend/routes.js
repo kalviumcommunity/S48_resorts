@@ -3,15 +3,7 @@ const router = express.Router();
 const ResortModal = require('./Modals/Resortmodal');
 const UsersModal = require('./Modals/Usermodal');
 
-// Create operation - POST
-router.post('/items', (req, res) => {
-  const newItem = req.body;
-  // Assuming 'items' is a placeholder array; replace with actual DB operation
-  items.push(newItem);
-  res.status(201).json(newItem);
-});
-
-// Read operation - GET
+// Read operation - GET all resorts
 router.get('/resortsdata', async (req, res) => {
   try {
     const resorts = await ResortModal.find();
@@ -21,6 +13,7 @@ router.get('/resortsdata', async (req, res) => {
   }
 });
 
+// Read operation - GET all users
 router.get('/usersdata', async (req, res) => {
   try {
     const users = await UsersModal.find();
@@ -30,21 +23,24 @@ router.get('/usersdata', async (req, res) => {
   }
 });
 
-// Update operation - PUT
-router.put('/items/:id', (req, res) => {
-  const itemId = req.params.id;
-  const updatedItem = req.body;
-  // Assuming 'items' is a placeholder array; replace with actual DB operation
-  items[itemId] = updatedItem;
-  res.json(updatedItem);
-});
+// Create operation - POST a new resort
+router.post('/resortsdata', async (req, res) => {
+  const { resortName, openingTime, closingTime, resortAddress, resortcontactNumber } = req.body;
 
-// Delete operation - DELETE
-router.delete('/items/:id', (req, res) => {
-  const itemId = req.params.id;
-  // Assuming 'items' is a placeholder array; replace with actual DB operation
-  items.splice(itemId, 1);
-  res.status(204).json("deleted item successfully");
+  const newResort = new ResortModal({
+    resortName,
+    openingTime,
+    closingTime,
+    resortAddress,
+    resortcontactNumber, 
+  });
+
+  try {
+    const savedResort = await newResort.save();
+    res.status(201).json(savedResort);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
 });
 
 module.exports = router;

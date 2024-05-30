@@ -1,0 +1,21 @@
+meta {
+  name: addUsersdata
+  type: http
+  seq: 4
+}
+
+post {
+  url: http://localhost:3000/usersdata
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+      
+      "userName": "arthi",
+      "emailId": "arthi99722@gmail.com",
+      "password": "12345",
+      "phonenumber": "0987654321"
+    }
+}

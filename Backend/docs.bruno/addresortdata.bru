@@ -1,0 +1,22 @@
+meta {
+  name: addresortdata
+  type: http
+  seq: 3
+}
+
+post {
+  url: http://localhost:3000/resortsdata
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+      
+      "resortName": "cave",
+      "openingTime": "10:00",
+      "closingTime": "6:00",
+      "resortAddress": " Oceanfront Avenue Tropical Island, Paradise",
+      "resortcontactNumber": "9876545678"
+    }
+}

@@ -18,8 +18,8 @@ const ResortSchema = new Schema({
     type: String,
     required: true
   },
-  resortContactNumber: {
-    type: String,
+  resortcontactNumber: {
+    type: Number,
     required: true
   }
 });

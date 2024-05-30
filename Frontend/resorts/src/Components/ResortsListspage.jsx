@@ -25,7 +25,7 @@ function ResortsListspage() {
             <p><strong>Opening Time:</strong> {resort.openingTime}</p>
             <p><strong>Closing Time:</strong> {resort.closingTime}</p>
             <p><strong>Address:</strong> {resort.resortAddress}</p>
-            <p><strong>Contact Number:</strong> {resort.resortContactNumber}</p>
+            <p><strong>Contact Number:</strong> {resort.resortcontactNumber}</p>
           </div>
         ))}
       </div>

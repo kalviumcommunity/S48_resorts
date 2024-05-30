@@ -1,22 +1,24 @@
 require('dotenv').config();
 const express = require('express');
-const cors = require('cors'); // Import cors
 const mongoose = require('mongoose');
 const routes = require('./routes'); // Assuming routes.js is your routes file
-
+// const bodyParser = require('body-parser');
+const cors = require('cors')
+const UsersModal = require('./Modals/Usermodal');
 const app = express();
 const port = 3000;
 const mongoDBuri = process.env.MONGODB_URI;
 
 // Middleware
-app.use(cors()); // Enabling CORS
-app.use(express.json()); // Parse JSON bodies
-app.use('/', routes); // Mount routes
+app.use(cors()); 
+app.use(express.json());
+app.use('/', routes); 
 
 // Connecting database (MongoDB) to server
 mongoose.connect(mongoDBuri, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => { console.log("Database Connected!!") })
   .catch((err) => console.error(err));
+
 
 // Basic route to check server status
 app.get("/", (req, res) => {
