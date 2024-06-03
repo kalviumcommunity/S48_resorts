@@ -3,7 +3,15 @@ const router = express.Router();
 const ResortModal = require('./Modals/Resortmodal');
 const UsersModal = require('./Modals/Usermodal');
 
-// Read operation - GET all resorts
+// Create operation - POST
+router.post('/items', (req, res) => {
+  const newItem = req.body;
+  // Assuming 'items' is a placeholder array; replace with actual DB operation
+  items.push(newItem);
+  res.status(201).json(newItem);
+});
+
+// Read operation - GET
 router.get('/resortsdata', async (req, res) => {
   try {
     const resorts = await ResortModal.find();
@@ -13,7 +21,47 @@ router.get('/resortsdata', async (req, res) => {
   }
 });
 
-// Read operation - GET all users
+router.get('/resortsdata/:id', async (req, res) => {
+  const id=req.params.id;
+  ResortModal.findById({_id:id}).then(resort=>res.json(resort))
+  .catch(err=>res.json(err))
+});
+
+router.post('/addresort', async (req, res) => {
+  try {
+      const newResort = new ResortModal(req.body);
+      await newResort.save();
+      res.status(201).json(newResort);
+  } catch (err) {
+      res.status(500).send(err);
+  }
+});
+
+router.put('/updateresort/:id', (req, res) => {
+  const id = req.params.id;
+  ResortModal.findByIdAndUpdate({_id:id},
+    {resortName:req.body.resortName,
+    openingTime:req.body.openingTime,
+    closingTime:req.body.closingTime,
+    resortAddress:req.body.resortAddress,
+    resortContactNumber:req.body.resortContactNumber})
+    .then(data=>res.json(data))
+    .catch(err=>res.json(err))
+});
+
+router.delete('/deleteresort/:id', async (req, res) => {
+  const id = req.params.id;
+  try {
+    const result = await ResortModal.findByIdAndDelete({ _id: id });
+    console.log(result);
+    res.status(200).json({ message: 'Deleted successfully' });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
+
 router.get('/usersdata', async (req, res) => {
   try {
     const users = await UsersModal.find();
@@ -23,24 +71,22 @@ router.get('/usersdata', async (req, res) => {
   }
 });
 
-// Create operation - POST a new resort
-router.post('/resortsdata', async (req, res) => {
-  const { resortName, openingTime, closingTime, resortAddress, resortcontactNumber } = req.body;
 
-  const newResort = new ResortModal({
-    resortName,
-    openingTime,
-    closingTime,
-    resortAddress,
-    resortcontactNumber, 
-  });
+// Update operation - PUT
+router.put('/items/:id', (req, res) => {
+  const itemId = req.params.id;
+  const updatedItem = req.body;
+  // Assuming 'items' is a placeholder array; replace with actual DB operation
+  items[itemId] = updatedItem;
+  res.json(updatedItem);
+});
 
-  try {
-    const savedResort = await newResort.save();
-    res.status(201).json(savedResort);
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
+// Delete operation - DELETE
+router.delete('/items/:id', (req, res) => {
+  const itemId = req.params.id;
+  // Assuming 'items' is a placeholder array; replace with actual DB operation
+  items.splice(itemId, 1);
+  res.status(204).json("deleted item successfully");
 });
 
 module.exports = router;

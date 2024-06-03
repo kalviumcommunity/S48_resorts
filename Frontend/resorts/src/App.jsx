@@ -2,27 +2,24 @@ import React from 'react';
 import './App.css';
 import Landingpage from './Components/Landingpage';
 import ResortsListspage from './Components/ResortsListspage';
-// import Signup from './Components/';
-// import Login from './Components/Login';
-// import Users from './Components/Users';
-// import UpdateUsers from "./Components/UpdateUsers";
-import CreateUser from './Components/CreateUsres'; 
+import UpdateUser from './Components/UpdateUsres'; 
+import CreateUser from './Components/CreateUsres';
+import SignUp from './Components/Signup';
+import Login from './Components/Login';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
   return (
-    <BrowserRouter>
+ <div>
       <Routes>
         <Route path="/" element={<Landingpage />} />
         <Route path="/resortslist" element={<ResortsListspage />} />
-        {/* <Route path="/signup" element={<Signup />} /> */}
-        {/* <Route path="/login" element={<Login />} />
-        <Route path="/users" element={<Users />} /> */}
-        {/* <Route path="/update" element={<UpdateUsers />} /> */}
-        <Route path="/createuser" element={<CreateUser />} /> {/* Ensure route consistency */}
+        <Route path="/UpdateUser/:id" element={<UpdateUser />} /> 
+        <Route path="/createuser" element={<CreateUser />} />
+        <Route path="/signup" element={<SignUp />} />
+        <Route path="/login" element={<Login />} />
       </Routes>
-    </BrowserRouter>
+    </div>
   );
 }
 
