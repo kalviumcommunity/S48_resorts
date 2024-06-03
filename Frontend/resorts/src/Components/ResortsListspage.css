@@ -1,43 +1,79 @@
-.resorts-list-page {
-    padding: 20px;
-    font-family: Arial, sans-serif;
-    background-color: #f0f4f8;
-    color: #333;
+  .resorts-list-page {
+      padding: 20px;
+      font-family: Arial, sans-serif;
+      background-color: #f0f4f8;
+      color: #333;
+    }
+    
+    .resorts-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+    }
+    
+    .resort-item {
+      background-color: #fff;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 20px;
+      width: calc(33.333% - 40px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease;
+    }
+    
+    .resort-item:hover {
+      transform: translateY(-5px);
+    }
+    
+    .resort-item h3 {
+      margin-top: 0;
+      font-size: 1.5em;
+      color: #333;
+    }
+    
+    .resort-item p {
+      font-size: 1em;
+      color: #666;
+    }
+    
+  #resorttitle{
+  text-align: center;
+  padding-bottom: 20px;
   }
-  
-  .resorts-list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    justify-content: center;
+
+  /* CreateUser.css */
+
+  /* Existing styles here... */
+
+  .add-btn, .btn-danger {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 4px;
+    text-align: center;
+    cursor: pointer;
+    margin: 5px;
+    transition: background-color 0.3s ease;
   }
-  
-  .resort-item {
-    background-color: #fff;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 20px;
-    width: calc(33.333% - 40px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease;
+
+  .add-btn {
+    background-color: #007bff;
+    color: #fff;
+    text-decoration: none;
+    border: none;
   }
-  
-  .resort-item:hover {
-    transform: translateY(-5px);
+
+  .add-btn:hover {
+    background-color: #0056b3;
   }
-  
-  .resort-item h3 {
-    margin-top: 0;
-    font-size: 1.5em;
-    color: #333;
+
+  .btn-danger {
+    background-color: #dc3545;
+    color: #fff;
+    border: none;
   }
-  
-  .resort-item p {
-    font-size: 1em;
-    color: #666;
+
+  .btn-danger:hover {
+    background-color: #c82333;
   }
-  
-#resorttitle{
-text-align: center;
-padding-bottom: 20px;
-}

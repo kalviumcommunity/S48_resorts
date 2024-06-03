@@ -21,6 +21,47 @@ router.get('/resortsdata', async (req, res) => {
   }
 });
 
+router.get('/resortsdata/:id', async (req, res) => {
+  const id=req.params.id;
+  ResortModal.findById({_id:id}).then(resort=>res.json(resort))
+  .catch(err=>res.json(err))
+});
+
+router.post('/addresort', async (req, res) => {
+  try {
+      const newResort = new ResortModal(req.body);
+      await newResort.save();
+      res.status(201).json(newResort);
+  } catch (err) {
+      res.status(500).send(err);
+  }
+});
+
+router.put('/updateresort/:id', (req, res) => {
+  const id = req.params.id;
+  ResortModal.findByIdAndUpdate({_id:id},
+    {resortName:req.body.resortName,
+    openingTime:req.body.openingTime,
+    closingTime:req.body.closingTime,
+    resortAddress:req.body.resortAddress,
+    resortContactNumber:req.body.resortContactNumber})
+    .then(data=>res.json(data))
+    .catch(err=>res.json(err))
+});
+
+router.delete('/deleteresort/:id', async (req, res) => {
+  const id = req.params.id;
+  try {
+    const result = await ResortModal.findByIdAndDelete({ _id: id });
+    console.log(result);
+    res.status(200).json({ message: 'Deleted successfully' });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
+
 router.get('/usersdata', async (req, res) => {
   try {
     const users = await UsersModal.find();
@@ -29,6 +70,7 @@ router.get('/usersdata', async (req, res) => {
     res.status(500).send(err);
   }
 });
+
 
 // Update operation - PUT
 router.put('/items/:id', (req, res) => {
