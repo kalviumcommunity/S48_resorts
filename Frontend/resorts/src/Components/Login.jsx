@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import "./Login.css";
 import { useNavigate } from 'react-router-dom'
+import axios from 'axios'
 
 const Login = () => {
   const [credentials, setCredentials] = useState({
-    username: "",
+    userName: "",
     password: ""
   });
 
@@ -17,23 +18,35 @@ const Login = () => {
     setCredentials({ ...credentials, [name]: value });
   };
 
-  const handleSubmit = (e) => {
+  function setCookie(name, value, daysToExpire) {
+    let date = new Date();
+    date.setTime(date.getTime() + daysToExpire * 24 * 60 * 60 * 1000);
+    document.cookie =
+      name + '=' + value + ';expires=' + date.toUTCString() + ';path=/';
+  }
+
+  const handleSubmit = async(e)=>{
     e.preventDefault();
-    if (credentials.username && credentials.password) {
-      console.log("Username:", credentials.username);
-      console.log("Password:", credentials.password);
-      setSubmitted(true);
-      setShowError(false); 
-      navigate("/resortslist")
-    } else {
-      setShowError(true); 
+    try{
+      const {userName,password} = credentials
+      const response = await axios.post('http://localhost:3000/login',{userName,password});
+      if(response.data.success){
+        setCookie('userName', userName, 1);
+        navigate('/resortslist');
+        alert("Login successfull")
+      }else{
+        console.error('Login failed:',response.data.message);
+      }
+    } catch(error){
+      alert("Login failed")
+      console.error('Error during login:', error.message);
     }
   };
 
   return (
     <div className="form-container">
       <form className="login-form" onSubmit={handleSubmit}>
-        {showError && !credentials.username && (
+        {showError && !credentials.userName && (
           <span className="error-message">Please enter your username</span>
         )}
 
@@ -42,8 +55,8 @@ const Login = () => {
           className="form-field"
           type="text"
           placeholder="Username"
-          name="username"
-          value={credentials.username}
+          name="userName"
+          value={credentials.userName}
           onChange={handleChange}
         />
 
@@ -66,7 +79,7 @@ const Login = () => {
         </button>
 
         {submitted && (
-          <div className="info-message">Logging in as {credentials.username}</div>
+          <div className="info-message">Logging in as {credentials.userName}</div>
         )}
       </form>
     </div>

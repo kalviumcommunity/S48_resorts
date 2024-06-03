@@ -91,6 +91,29 @@ router.get('/usersdata', async (req, res) => {
   }
 });
 
+router.post('/login', async(req, res) =>{
+  try{
+    const {userName, password} = req.body;
+    const validationSchema = Joi.object({
+      userName: Joi.string().required(),
+      password: Joi.string().required(),
+    });
+
+    const validationResult = await validationSchema.validateAsync({userName,password});
+    const user = await UsersModal.findOne({userName: validationResult.userName,password: validationResult.password});
+
+    if(user){
+      res.cookie('userName',userName)
+      res.json({success: true, message: 'Login successful'});
+    } else{
+      res.status(401).json({success: false, message: 'Invalid userName or password'});
+    }
+  } catch(err){
+    console.error(err);
+    res.status(500).json({error: 'Internal Server Error'});
+  }
+});
+
 router.post('/adduser', async (req, res) => {
   const { error } = userSchema.validate(req.body);
   if (error) {
