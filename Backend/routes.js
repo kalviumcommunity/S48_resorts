@@ -2,6 +2,22 @@ const express = require('express');
 const router = express.Router();
 const ResortModal = require('./Modals/Resortmodal');
 const UsersModal = require('./Modals/Usermodal');
+const Joi = require('joi');
+
+const userSchema = Joi.object({
+  userName: Joi.string().required(),
+  emailId: Joi.string().email().required(),
+  password: Joi.string().required()
+});
+
+const resortSchema = Joi.object({
+  resortName: Joi.string().required(),
+  openingTime: Joi.string().required(),
+  closingTime: Joi.string().required(),
+  resortAddress: Joi.string().required(),
+  resortContactNumber: Joi.string().required()
+});
+
 
 // Create operation - POST
 router.post('/items', (req, res) => {
@@ -28,12 +44,16 @@ router.get('/resortsdata/:id', async (req, res) => {
 });
 
 router.post('/addresort', async (req, res) => {
+  const { error } = resortSchema.validate(req.body);
+  if (error) {
+    return res.status(400).json({ error: error.details[0].message });
+  }
   try {
-      const newResort = new ResortModal(req.body);
-      await newResort.save();
-      res.status(201).json(newResort);
+    const newResort = new ResortModal(req.body);
+    await newResort.save();
+    res.status(201).json(newResort);
   } catch (err) {
-      res.status(500).send(err);
+    res.status(500).send(err);
   }
 });
 
@@ -71,6 +91,20 @@ router.get('/usersdata', async (req, res) => {
   }
 });
 
+router.post('/adduser', async (req, res) => {
+  const { error } = userSchema.validate(req.body);
+  if (error) {
+    return res.status(400).json({ error: error.details[0].message });
+  }
+
+  try {
+    const newUser = new UsersModal(req.body);
+    await newUser.save();
+    res.status(201).json(newUser);
+  } catch (err) {
+    res.status(500).send(err);
+  }
+});
 
 // Update operation - PUT
 router.put('/items/:id', (req, res) => {
