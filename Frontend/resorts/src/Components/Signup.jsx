@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import './Signup.css';
 import { useNavigate } from 'react-router-dom'
-
+import axios from 'axios'
 const SignUp = () => {
   const [fields, setFields] = useState({
-    username: "",
-    email: "",
+    userName: "",
+    emailId: "",
     password: ""
   });
 
@@ -19,16 +19,17 @@ const SignUp = () => {
     setFields({ ...fields, [name]: value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit =  (e) => {
     e.preventDefault();
-    if (fields.username && fields.email && fields.password) {
-      setValidation(true);
-      setSubmitted(true);
-      setShowError(false);
-      navigate("/Login")
-    } else {
-      setShowError(true); // Show error if any of the fields are empty
-    }
+    const { userName, emailId, password } = fields;
+    axios.post('http://localhost:3000/adduser',
+     {userName,emailId,password})
+     .then(result => {
+      console.log(result)
+      navigate('/login');
+      alert('Signed up successfully!');
+    })
+     .catch(error=>console.error('Error adding entity:',error))
   };
 
   return (
@@ -38,25 +39,25 @@ const SignUp = () => {
           <div className="success-message">Registration successful!</div>
         ) : null}
 
-        {showError && !fields.username && <span>Please enter your username</span>}
+        {showError && !fields.userName && <span>Please enter your userName</span>}
         <input
-          id="username"
+          id="userName"
           className="form-field"
           type="text"
-          placeholder="Username"
-          name="username"
-          value={fields.username}
+          placeholder="UserName"
+          name="userName"
+          value={fields.userName}
           onChange={handleChange}
         />
 
-        {showError && !fields.email && <span>Please enter your email</span>}
+        {showError && !fields.emailId && <span>Please enter your emailId</span>}
         <input
-          id="email"
+          id="emailId"
           className="form-field"
           type="text"
-          placeholder="Email"
-          name="email"
-          value={fields.email}
+          placeholder="EmailId"
+          name="emailId"
+          value={fields.emailId}
           onChange={handleChange}
         />
 
