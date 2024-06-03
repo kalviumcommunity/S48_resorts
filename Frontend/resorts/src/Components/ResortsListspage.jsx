@@ -23,6 +23,7 @@ function ResortsListspage() {
     navigate(`/UpdateUser/${id}`);
   };
 
+
   const handleDelete = (id)=>{
     axios.delete('http://localhost:3000/deleteresort/'+id)
     .then((res)=>{
@@ -32,11 +33,18 @@ function ResortsListspage() {
     .catch((err)=>{console.log(err)})
   }
 
+  const handleLogout = () => {
+    document.cookie = 'userName=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/';
+    navigate('/');
+    document.cookie? console.log(document.cookie):console.log("No cookies found")
+  };
+
   return (
     <div className="resorts-list-page">
       <h1 id='resorttitle'>Resorts List Page</h1>
       <div>
         <Link to="/CreateUser" className="add-btn">Add+</Link> 
+        <button className="add-btn" onClick={handleLogout}>Logout</button>
       </div>
       <div className="resorts-list">
         {resorts.map((resort, index) => (
