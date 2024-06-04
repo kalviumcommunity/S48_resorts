@@ -32,6 +32,7 @@ const Login = () => {
       const response = await axios.post('http://localhost:3000/login',{userName,password});
       if(response.data.success){
         setCookie('userName', userName, 1);
+        setCookie('acessToken',response.data.accessToken)
         navigate('/resortslist');
         alert("Login successfull")
       }else{

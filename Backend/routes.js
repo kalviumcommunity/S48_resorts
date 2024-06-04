@@ -3,6 +3,7 @@ const router = express.Router();
 const ResortModal = require('./Modals/Resortmodal');
 const UsersModal = require('./Modals/Usermodal');
 const Joi = require('joi');
+const jwt = require('jsonwebtoken')
 
 const userSchema = Joi.object({
   userName: Joi.string().required(),
@@ -103,10 +104,12 @@ router.post('/login', async(req, res) =>{
     const user = await UsersModal.findOne({userName: validationResult.userName,password: validationResult.password});
 
     if(user){
+    const accessToken = jwt.sign({userName},process.env.ACCESS_TOKEN_SECRET)
       res.cookie('userName',userName)
-      res.json({success: true, message: 'Login successful'});
+      res.cookie('token', accessToken);
+      res.json({success: true, message: 'Login successful', accessToken:accessToken});
     } else{
-      res.status(401).json({success: false, message: 'Invalid userName or password'});
+      res.status(401).json({success: false, message: 'Invalid userName or password',});
     }
   } catch(err){
     console.error(err);
