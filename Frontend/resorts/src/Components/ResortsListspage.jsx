@@ -35,6 +35,7 @@ function ResortsListspage() {
 
   const handleLogout = () => {
     document.cookie = 'userName=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/';
+    document.cookie = 'acessToken=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/';
     navigate('/');
     document.cookie? console.log(document.cookie):console.log("No cookies found")
   };
