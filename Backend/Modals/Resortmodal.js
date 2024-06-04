@@ -19,11 +19,15 @@ const ResortSchema = new Schema({
     required: true
   },
   resortContactNumber: {
-    type: Number,
+    type: String,
+    required: true
+  },
+  createdby: {
+    type: String,
     required: true
   }
 });
 
 const ResortModal = mongoose.model('resorts', ResortSchema);
 
-module.exports = ResortModal;
+module.exports = ResortModal; 
