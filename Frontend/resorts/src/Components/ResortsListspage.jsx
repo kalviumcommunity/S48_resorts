@@ -7,7 +7,20 @@ import {  useNavigate } from 'react-router-dom';
 
 function ResortsListspage() {
   const [resorts, setResorts] = useState([]);
+  const [users,setUsers] = useState([])
+
   const navigate = useNavigate();
+
+  useEffect(()=>{
+    axios.get("http://localhost:3000/usersdata")
+    .then(
+      users=>{
+        setUsers(users.data)}
+    )
+    .catch(err=>
+      console.log(err)
+    )
+  },[])
 
   useEffect(() => {
     axios.get('http://localhost:3000/resortsdata')
@@ -22,6 +35,12 @@ function ResortsListspage() {
   const handleUpdateClick = (id) => {
     navigate(`/UpdateUser/${id}`);
   };
+
+  function getCookie(name) {
+    let cookieArray = document.cookie.split('; ');
+    let cookie = cookieArray.find((row) => row.startsWith(name + '='));
+    return cookie ? cookie.split('=')[1] : null;
+  }
 
 
   const handleDelete = (id)=>{
@@ -40,15 +59,28 @@ function ResortsListspage() {
     document.cookie? console.log(document.cookie):console.log("No cookies found")
   };
 
+  const username=getCookie('userName')
+  const [selectedValue , setSelectedvalue] = useState(username)
+  const handleSelectChange=(e)=>{
+    setSelectedvalue(e.target.value)
+  }
+
   return (
     <div className="resorts-list-page">
       <h1 id='resorttitle'>Resorts List Page</h1>
+      <div>
+      <select  value={selectedValue} onChange={handleSelectChange}>
+          {users.map((user,i)=>(
+            <option key={i} value={user.userName}>{user.userName}</option>
+          ))}
+        </select>
+      </div>
       <div>
         <Link to="/CreateUser" className="add-btn">Add+</Link> 
         <button className="add-btn" onClick={handleLogout}>Logout</button>
       </div>
       <div className="resorts-list">
-        {resorts.map((resort, index) => (
+        {resorts.filter(item=>item.createdby==selectedValue).map((resort, index) => (
           <div key={index} className="resort-item">
             <h3>{resort.resortName}</h3>
             <p><strong>Opening Time:</strong> {resort.openingTime}</p>

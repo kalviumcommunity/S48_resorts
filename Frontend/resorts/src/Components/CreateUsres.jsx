@@ -10,7 +10,15 @@ function CreateUser() {
     const [resortAddress, setResortAddress] = useState("");
     const [resortContactNumber, setResortContactNumber] = useState(""); 
     const navigate = useNavigate();
+
+    function getCookie(name) {
+        let cookieArray = document.cookie.split('; ');
+        let cookie = cookieArray.find((row) => row.startsWith(name + '='));
+        return cookie ? cookie.split('=')[1] : null;
+      }
     
+      const createdby = getCookie('userName')
+
     const submit = (e) => {
         e.preventDefault();
         axios.post("http://localhost:3000/addresort", { 
@@ -18,7 +26,8 @@ function CreateUser() {
                 openingTime, 
                 closingTime, 
                 resortAddress, 
-                resortContactNumber 
+                resortContactNumber,
+                createdby 
             })
             .then(result => {
                 console.log(result);
@@ -26,6 +35,8 @@ function CreateUser() {
             })
             .catch(err => console.log(err));
     };
+
+
 
     return (
         <div className="create-user-container">

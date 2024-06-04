@@ -16,7 +16,8 @@ const resortSchema = Joi.object({
   openingTime: Joi.string().required(),
   closingTime: Joi.string().required(),
   resortAddress: Joi.string().required(),
-  resortContactNumber: Joi.string().required()
+  resortContactNumber: Joi.string().required(),
+  createdby: Joi.string().required()
 });
 
 
